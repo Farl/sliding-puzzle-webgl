@@ -73,13 +73,17 @@
           progressBarEmpty.style.display = "";
           progressBarFull.style.width = `${100 * progress}%`;
         }).then((unityInstance) => {
+
           loadingCover.style.display = "none";
+
           if (canFullscreen) {
             if (!hideFullScreenButton) {
               fullscreenButton.style.display = "";
             }
             fullscreenButton.onclick = () => {
-              unityInstance.SetFullscreen(1);
+              //unityInstance.SetFullscreen(1);
+              var unityContainer = document.getElementById('unity-container');
+              toggleFullscreen(unityContainer);
             };
           }
         }).catch((message) => {
@@ -87,6 +91,31 @@
         });
       };
       document.body.appendChild(script);
+
+      // Fullscreen toggle function
+      function toggleFullscreen(container) {
+        if (!document.fullscreenElement) {
+          if (container.requestFullscreen) {
+            container.requestFullscreen();
+          } else if (container.mozRequestFullScreen) { // Firefox
+            container.mozRequestFullScreen();
+          } else if (container.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            container.webkitRequestFullscreen();
+          } else if (container.msRequestFullscreen) { // IE/Edge
+            container.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { // IE/Edge
+            document.msExitFullscreen();
+          }
+        }
+      }
     </script>
   </body>
 </html>
