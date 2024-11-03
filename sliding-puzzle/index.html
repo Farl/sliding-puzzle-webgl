@@ -35,6 +35,8 @@
         productName: "More Sliding",
         productVersion: "1.0.4",
       };
+      // jquery $(document).ready equivalent
+      const $ = (selector) => document.querySelector(selector);
 
       const container = document.querySelector("#unity-container");
       const canvas = document.querySelector("#unity-canvas");
@@ -81,9 +83,7 @@
               fullscreenButton.style.display = "";
             }
             fullscreenButton.onclick = () => {
-              //unityInstance.SetFullscreen(1);
-              var unityContainer = document.getElementById('unity-container');
-              toggleFullscreen(unityContainer);
+              toggleFullscreen(container);
             };
           }
         }).catch((message) => {
@@ -95,6 +95,7 @@
       // Fullscreen toggle function
       function toggleFullscreen(container) {
         if (!document.fullscreenElement) {
+          //unityInstance.SetFullscreen(1);
           if (container.requestFullscreen) {
             container.requestFullscreen();
           } else if (container.mozRequestFullScreen) { // Firefox
@@ -105,6 +106,7 @@
             container.msRequestFullscreen();
           }
         } else {
+          //unityInstance.SetFullscreen(0);
           if (document.exitFullscreen) {
             document.exitFullscreen();
           } else if (document.mozCancelFullScreen) { // Firefox
