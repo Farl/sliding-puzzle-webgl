@@ -4,14 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="More Sliding Puzzle">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="More Sliding Puzzle">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
     <title>More Sliding</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body class="dark">
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas"></canvas>
-    </div>
+      <div id="unity-container" class="unity-desktop">
+
+        <canvas id="unity-canvas">
+        </canvas>
+          <div id="unity-fullscreen-button" style="display: none;"></div>
+
+      </div>
     <div id="loading-cover" style="display:none;">
       <div id="unity-loading-bar">
         <div id="unity-logo"><img src="logo.png"></div>
@@ -21,9 +32,8 @@
         <div class="spinner"></div>
       </div>
     </div>
-    <div id="unity-fullscreen-button" style="display: none;"></div>
     <script>
-      const hideFullScreenButton = "";
+      const hideFullScreenButton = "true";
       const buildUrl = "Build";
       const loaderUrl = buildUrl + "/More Sliding.loader.js";
       const config = {
@@ -35,6 +45,8 @@
         productName: "More Sliding",
         productVersion: "1.0.4",
       };
+      // jquery $(document).ready equivalent
+      const $ = (selector) => document.querySelector(selector);
 
       const container = document.querySelector("#unity-container");
       const canvas = document.querySelector("#unity-canvas");
@@ -81,9 +93,7 @@
               fullscreenButton.style.display = "";
             }
             fullscreenButton.onclick = () => {
-              //unityInstance.SetFullscreen(1);
-              var unityContainer = document.getElementById('unity-container');
-              toggleFullscreen(unityContainer);
+              toggleFullscreen(container);
             };
           }
         }).catch((message) => {
@@ -95,6 +105,7 @@
       // Fullscreen toggle function
       function toggleFullscreen(container) {
         if (!document.fullscreenElement) {
+          //unityInstance.SetFullscreen(1);
           if (container.requestFullscreen) {
             container.requestFullscreen();
           } else if (container.mozRequestFullScreen) { // Firefox
@@ -105,6 +116,7 @@
             container.msRequestFullscreen();
           }
         } else {
+          //unityInstance.SetFullscreen(0);
           if (document.exitFullscreen) {
             document.exitFullscreen();
           } else if (document.mozCancelFullScreen) { // Firefox
@@ -115,6 +127,29 @@
             document.msExitFullscreen();
           }
         }
+      }
+
+      // Resize canvas with correct aspect ratio
+      function resizeCanvas() {
+        // Set canvas drawing buffer size
+        //canvas.width = container.offsetWidth * config.devicePixelRatio;
+        //canvas.height = container.offsetWidth * config.devicePixelRatio;
+        //canvas.width = window.innerWidth;
+        //canvas.height = window.innerHeight
+      }
+
+      // Ensure immediate resize on load
+      function init() {
+        // Resize immediately
+        resizeCanvas();
+        //window.addEventListener('resize', resizeCanvas);
+      }
+
+      // Call init when DOM is fully loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
       }
     </script>
   </body>

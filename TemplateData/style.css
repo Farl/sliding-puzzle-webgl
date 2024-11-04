@@ -8,6 +8,8 @@ html, body {
     height: 100%;
 }
 canvas {
+    width: 100%;
+    height: 100%;
     display: block;
 }
 body {
@@ -68,11 +70,68 @@ body {
 #unity-fullscreen-button {
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
     width: 38px;
     height: 38px;
     background: url('fullscreen-button.png') no-repeat center;
     background-size: contain;
+    z-index: 1;
+}
+
+#unity-fullscreen-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 38px;
+    height: 38px;
+    background: url('fullscreen-button.png') no-repeat center;
+    background-size: contain;
+    z-index: 1;
+    border-radius: 6px;
+}
+
+#SSUploadFile_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    opacity: 1;
+    z-index: 1;
+}
+
+#SSUploadFile_fileinput {
+    position: absolute;
+    bottom: 50%;
+    margin: 10%;
+    padding: 0.8rem;
+    left: 0px;
+    width: 80%;
+    height: 10%;
+    background-color: lightgray;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 1;
+    z-index: 2;
+    outline: none;
+    border-color: #666;
+    border-radius: 6px;
+}
+
+#SSUploadFile_confirm {
+    position: absolute;
+    top: 50%;
+    margin: 10%;
+    padding: 0.8rem;
+    width: 80%;
+    height: 10%;
+    background-color: lightgray;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 1;
+    z-index: 2;
+    border-radius: 6px;
 }
 
 .spinner,
